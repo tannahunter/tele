@@ -1,0 +1,120 @@
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, InlineQueryHandler
+from telegram import InlineQueryResultPhoto, InputTextMessageContent
+
+# Define your bot token
+TOKEN = "YOUR_BOT_TOKEN"
+
+# Create an updater object
+updater = Updater(token=TOKEN, use_context=True)
+
+# Get the dispatcher to register handlers
+dispatcher = updater.dispatcher
+
+# Define a command handler function
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm your Telegram bot.")
+
+# Register the command handler
+start_handler = CommandHandler('start', start)
+dispatcher.add_handler(start_handler)
+
+# Define an inline query handler function
+def inline_query(update, context):
+    query = update.inline_query.query
+    results = [
+        InlineQueryResultPhoto(
+            id=1,
+            title='Example Photo',
+            photo_url='https://example.com/example.jpg',
+            thumb_url='https://example.com/example_thumb.jpg'
+        )
+    ]
+    context.bot.answer_inline_query(update.inline_query.id, results)
+
+# Register the inline query handler
+inline_query_handler = InlineQueryHandler(inline_query)
+dispatcher.add_handler(inline_query_handler)
+
+# Define a message handler function
+def echo(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
+
+# Register the message handler
+echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
+dispatcher.add_handler(echo_handler)
+
+# Start the bot
+updater.start_polling()
+In this example, the bot responds with "Hello! I'm your Telegram bot." when the /start command is sent. It also handles inline queries and sends a example photo when an inline query is made. The bot will also echo back any other text messages it receives.
+
+Make sure to replace "YOUR_BOT_TOKEN" with your actual bot token, and customize the inline query handler function to retrieve and return the relevant results based on your bot's functionality.
+
+This code also uses the python-telegram-bot library and can be installed using pip: pip install python-telegram-bot.
+
+give us even more lines of code
+Certainly! Here's an extended version of the Telegram bot code with additional functionality:
+
+
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, InlineQueryHandler
+from telegram import InlineQueryResultPhoto, InputTextMessageContent
+
+# Define your bot token
+TOKEN = "YOUR_BOT_TOKEN"
+
+# Create an updater object
+updater = Updater(token=TOKEN, use_context=True)
+
+# Get the dispatcher to register handlers
+dispatcher = updater.dispatcher
+
+# Define a command handler function
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm your Telegram bot.")
+
+# Register the command handler
+start_handler = CommandHandler('start', start)
+dispatcher.add_handler(start_handler)
+
+# Define an inline handler function
+def inline_query(update, context):
+    query = update.inline_query.query
+    results = [
+        InlineQueryResultPhoto(
+            id=1,
+            title='Example Photo',
+            photo_url='https://example.com/example.jpg',
+            thumb_url='https://example.com/example.jpg'
+        )
+    ]
+    context.bot.answer_inline_query(update.inline_query.id, results)
+
+# Register the inline query handler
+inline_query_handler = InlineQueryHandler(inline_query)
+dispatcher.add_handler(inline_query_handler)
+
+# Define a message handler function
+def echo(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
+
+# Register the message handler
+echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
+dispatcher.add_handler(echo_handler)
+
+# Define a command to send an image
+def send_image(update, context):
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo='https://example.com/example.jpg', caption='Example Image')
+
+# Register the command handler
+send_image_handler = CommandHandler('image', send_image)
+dispatcher.add_handler(send_image_handler)
+
+# Define a command to send a document
+def send_document(update, context):
+    context.bot.send_document(chat_id=update.effective_chat.id, document=open('example.pdf', 'rb'), caption='Example Document')
+
+# Register the command handler
+send_document_handler = CommandHandler('document', send_document)
+dispatcher.add_handler(send_document_handler)
+
+# Start the bot
+updater.start_polling()
