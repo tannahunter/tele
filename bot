@@ -47,9 +47,9 @@ dispatcher.add_handler(echo_handler)
 updater.start_polling()
 In this example, the bot responds with "Hello! I'm your bot." when the /start command is sent. It also handles inline queries and sends a example photo when an inline query is made. The bot will also echo back any other text messages it receives.
 
-Make sure to replace "YOUR_BOT_TOKEN" with your actual token, and customize the inline query handler function to retrieve and return the relevant results based on your bot's functionality.
+Make sure to replace "YOUR_BOT_TOKEN" with your actual token, and customize the inline query handler function to retrieve and return the relevant results based on your bot's functionality
 
-This code also uses the python-telegram-bot library and can be installed using pip: pip install python-telegram-bot.
+This code also uses the python-telegram-bot library and can be installed using pip: pip install python-telegram-bot
 
 give us even more lines of code
 Certainly! Here's an extended version of the Telegram bot code with additional functionality:
