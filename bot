@@ -7,7 +7,7 @@ TOKEN = "YOUR_BOT_TOKEN"
 # Create an updater object
 updater = Updater(token=TOKEN, use_context=True)
 
-# Get the dispatcher to register handlers
+# Get the dispatcher to register handlers.
 dispatcher = updater.dispatcher
 
 # Define a command handler function
